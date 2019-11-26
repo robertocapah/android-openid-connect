@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * A layer of syntactic sugar around the google-oauth-java-client library to simplify using OpenID
@@ -177,13 +178,18 @@ public class OIDCUtils {
      * @see <a href="http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth">Code Flow</a>
      */
     public static String codeFlowAuthenticationUrl(String authorizationServerUrl, String clientId,
-                                                   String redirectUrl, String[] scopes) {
+                                                   String redirectUrl, String[] scopes, String[] responseTypes) {
 
         List<String> scopesList = Arrays.asList(scopes);
+        List<String> responseTypesList = Arrays.asList(responseTypes);
+
+        String nonce = UUID.randomUUID().toString();
 
         AuthorizationCodeRequestUrl request = new AuthorizationCodeRequestUrl(authorizationServerUrl, clientId)
                 .setRedirectUri(redirectUrl)
-                .setScopes(scopesList);
+                .setScopes(scopesList)
+                .setResponseTypes(responseTypesList)
+                .set("nonce", nonce);
 
         //OPTIONAL OIDC request params
         if (scopesList.contains("offline_access")) {

@@ -145,12 +145,13 @@ public class AuthenticatorActivity extends AccountAuthenticatorActivity {
                         case AuthorizationCode:
                         default: {
                             // The URL will contain a `code` parameter when the user has been authenticated
-                            if (parameterNames.contains("code")) {
-                                String authToken = url.getQueryParameter("code");
+                            if (extractedFragment != null && extractedFragment.contains("access_token")) {
+                                String convertedUrl = urlString.replaceFirst("#", "?");
+                                Uri convertedUri = Uri.parse(convertedUrl);
 
-                                // Request the ID token
-                                RequestIdTokenTask task = new RequestIdTokenTask();
-                                task.execute(authToken);
+                                String accessToken = convertedUri.getQueryParameter("access_token");
+
+                                Log.e(TAG, accessToken);
                             }
                             else {
                                 Log.e(TAG, String.format(
