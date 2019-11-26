@@ -13,22 +13,24 @@ public final class Config {
     // TODO: Add the information you received from your OIDC provider below.
 
     public static final String clientId = "colibriDroidDevHybrid";
-    public static final String clientSecret = "devSecretHybrid";
+    public static final String clientSecret = "";
 
-    public static final String authorizationServerUrl = "http://hcsso.klgsys.com";
-    public static final String tokenServerUrl = "http://colibri.towert.win/core/login/token.php";
-    public static final String userInfoUrl = "http://colibri.towert.win/api/employee/get_employee_info";
+    public static final String authorizationServerUrl = "http://hcsso.klgsys.com/connect/authorize";
+    public static final String tokenServerUrl = "";
+    public static final String userInfoUrl = "";
 
     // This URL doesn't really have a use with native apps and basically just signifies the end
     // of the authorisation process. It doesn't have to be a real URL, but it does have to be the
     // same URL that is registered with your provider.
-    public static final String redirectUrl = "http://hcsso.klgsys.com";
+    public static final String redirectUrl = "http://colibri.towert.win/login_sso";
 
     // The `offline_access` scope enables us to request Refresh Tokens, so we don't have to ask the
     // user to authorise us again every time the tokens expire. Some providers might have an
     // `offline` scope instead. If you get an `invalid_scope` error when trying to authorise the
     // app, try changing it to `offline`.
     public static final String[] scopes = {"openid", "profile", "offline_access"};
+
+    public static final String[] responseTypes = {"code", "id_token", "token"};
 
     public enum Flows
     {

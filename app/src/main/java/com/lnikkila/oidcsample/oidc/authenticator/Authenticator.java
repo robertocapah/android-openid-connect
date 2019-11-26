@@ -182,7 +182,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
         switch (Config.flowType) {
             case AuthorizationCode :
                 authUrl = OIDCUtils.codeFlowAuthenticationUrl(Config.authorizationServerUrl,
-                        Config.clientId, Config.redirectUrl, Config.scopes);
+                        Config.clientId, Config.redirectUrl, Config.scopes, Config.responseTypes);
                 break;
             case Implicit:
                 authUrl = OIDCUtils.implicitFlowAuthenticationUrl(Config.authorizationServerUrl,
@@ -195,7 +195,7 @@ public class Authenticator extends AbstractAccountAuthenticator {
             default:
                 Log.d(TAG, "Requesting unsupported flowType! Using CodeFlow instead");
                 authUrl = OIDCUtils.codeFlowAuthenticationUrl(Config.authorizationServerUrl,
-                        Config.clientId, Config.redirectUrl, Config.scopes);
+                        Config.clientId, Config.redirectUrl, Config.scopes, Config.responseTypes);
                 break;
         }
 
